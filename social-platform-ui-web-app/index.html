@@ -122,7 +122,7 @@
       </aside>
 
       <!-- center profile page and post section -->
-      <section class="profile-post-container">
+      <section class="main-container">
         <div class="profile-header">
           <div class="top-user-imgs">
             <div class="banner-img">
@@ -141,16 +141,18 @@
           <div class="bottom-timeline-list">
             <ul class="timeline-menus menu-list nav-menus">
               <li class="menu-items active">
-                <a href="#" class="timeline-menu-items">Timeline</a>
+                <a href="#user-all-post" class="timeline-menu-items"
+                  >Timeline</a
+                >
               </li>
               <li class="menu-items">
-                <a href="#" class="timeline-menu-items">About</a>
+                <a href="#user-about" class="timeline-menu-items">About</a>
               </li>
               <li class="menu-items">
                 <a href="#" class="timeline-menu-items">Friends</a>
               </li>
               <li class="menu-items">
-                <a href="#" class="timeline-menu-items">Photos</a>
+                <a href="#user-post" class="timeline-menu-items">Photos</a>
               </li>
               <li class="menu-items">
                 <a href="#" class="timeline-menu-items">More</a>
@@ -159,7 +161,7 @@
           </div>
         </div>
 
-        <div class="left-area short-cards">
+        <div class="left-area short-cards" id="user-about">
           <div class="profile-info-card">
             <div class="header">
               <span class="left-title">Introduction</span>
@@ -243,24 +245,39 @@
           </div>
         </div>
 
-        <div class="right-area short-cards">
+        <div class="right-area short-cards" id="user-all-post">
           <div class="write-new-post-wrapper profile-info-card">
-            <ul class="post-categories-menu nav-menus menu-list">
-              <li class="menu-items active">Status</li>
-              <li class="menu-items">Photo</li>
-              <li class="menu-items">Video</li>
-            </ul>
             <div class="top-container">
-              <div class="user-profile"></div>
-              <textarea
-                name="write-post"
-                id="post"
-                cols="30"
-                rows="10"
-                placeholder="Write something to share..."
-              ></textarea>
+              <ul class="post-categories-menu nav-menus menu-list">
+                <li class="menu-items active">Status</li>
+                <li class="menu-items" id="upload-photo">Photo</li>
+                <!-- video is uploading not available for now -->
+                <!-- <li class="menu-items">Video</li> -->
+              </ul>
+              <div class="write-share-text">
+                <div class="user-profile"></div>
+                <textarea
+                  name="write-post"
+                  id="new-post-text"
+                  cols="30"
+                  rows="10"
+                  placeholder="Write something to share..."
+                ></textarea>
+              </div>
+              <div class="external-file-upload">
+                <input
+                  type="file"
+                  name="share-file"
+                  id="attach-file"
+                  accept="image/*"
+                />
+                <label for="attach-file">
+                  <i class="fa-solid fa-cloud-arrow-up"></i>
+                </label>
+              </div>
             </div>
 
+            <hr class="saperator" />
             <div class="bottom-container">
               <div class="left-icons">
                 <a href="#" class="post-more-details">
@@ -275,37 +292,40 @@
                   🎸 <span> Favourite </span>
                 </a>
               </div>
-              <button type="submit" id="submit-btn" class="share-btn">
+              <button type="submit" id="submit-btn" class="share-btn" disabled>
                 Share
               </button>
             </div>
           </div>
 
-          <div class="profile-post profile-info-card">
-            <div class="post">
+          <div class="profile-post-container" id="user-post">
+            <div class="post profile-info-card">
               <div class="user-post-header">
                 <div class="left-user">
                   <span class="user-profile"></span>
                   <div class="user-name">
                     <p class="name">
-                      <strong> Quan Ha </strong>create new
+                      <strong> Mohit </strong>create new
                       <a href="#" class="category link">album</a>
                     </p>
                     <p class="post-time">06 hour ago</p>
                   </div>
                 </div>
-                <i class="fa-solid fa-ellipsis"></i>
+                <div class="right-more-action remove-post">
+                  <i class="fa-solid fa-remove"></i>
+                </div>
               </div>
               <div class="post-content">
                 <p class="about-post-desc">
                   When the bass drops, so do my problems.
                 </p>
                 <div class="external-file">
-                  <spna class="file"></spna>
-                  <i class="fa-solid fa-heart like-icon"></i>
+                  <img src="./images/post-img.avif" alt="Post-image" />
                 </div>
               </div>
               <div class="post-interaction">
+                <i class="fa-solid fa-heart like-icon show-like-icon"></i>
+
                 <div class="like interact-mode">
                   <i class="fa-regular fa-heart"></i>
                   <span class="interaction-count">870</span>
