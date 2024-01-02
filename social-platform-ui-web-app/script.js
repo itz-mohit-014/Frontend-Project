@@ -336,8 +336,16 @@ function shareNewPost() {
 
 //  for remove existing post
 function removeSharedPost(e) {
-  const curPost = e.currentTarget.closest(".post");
-  curPost.remove();
+  const post = e.currentTarget.parentElement.parentElement;
+  if (post == postContainer.firstElementChild) {
+    postContainer.firstElementChild.classList.add("alert");
+    setTimeout(() => {
+      postContainer.firstElementChild.classList.remove("alert");
+    }, 1500);
+    return;
+  } else {
+    post.remove();
+  }
 }
 
 //  *************** all event listener  ******************
