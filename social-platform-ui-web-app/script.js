@@ -419,8 +419,13 @@ function updateProfile() {
     updateUserProfile
   );
 }
-// need work her....
-function addMoreEvent() {}
+// add events future update...
+function addMoreEvent(e) {
+  let mainParent = e.currentTarget.parentElement.parentElement;
+  let date = new Date();
+  let eventMonth = date.getMonth();
+  let eventDate = date.getDate();
+}
 
 //  *************** all event listener  ******************
 
@@ -453,4 +458,5 @@ showPhotoUpload.addEventListener("click", showUploadFileOption);
 attachFile.addEventListener("change", uploadFile);
 shareNewPostBtn.addEventListener("click", shareNewPost);
 
-addEvents.addEventListener("click", addMoreEvent);
+// future update
+// addEvents.addEventListener("click", addMoreEvent);
