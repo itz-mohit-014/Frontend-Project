@@ -441,9 +441,6 @@ showMoreOption.addEventListener("click", (e) => {
   itemsList.classList.toggle("show");
 });
 dayNightThemeBtn.addEventListener("click", toggleTheme);
-changeProfile.addEventListener("click", (e) => {
-  e.currentTarget.classList.add("change");
-});
 editProfile.addEventListener("click", updateProfile);
 // ****** sideBar toggle ******
 leftToggleMenuBtn.addEventListener("click", toggle);
