@@ -1,31 +1,31 @@
 const menuParent = document.querySelectorAll(".menu-list");
+// for sidebar toggle
 const leftToggleMenuBtn = document.querySelector("#menu-toggler");
 const leftMenuList = document.querySelector(".side-left");
 const rightMsgControlerBtn = document.querySelector("#msg-controler");
 const rightMsgSideBox = document.querySelector(".side-right");
+const addEvents = document.getElementById("add-event");
+// right sidebar more action
+const showMoreOption = document.getElementById("show-more");
 const dayNightThemeBtn = document.querySelector("#day-night-mode");
-
+const editProfile = document.getElementById("edit-profile");
+const changeProfile = document.querySelector(".main-profile-pic");
 // share new post related
 const postContentNewTextInput = document.getElementById("new-post-text");
 const attachFile = document.getElementById("attach-file");
 const shareNewPostBtn = document.getElementById("submit-btn");
 const showPhotoUpload = document.querySelector(".post-categories-menu");
-
 // post related
 const postContainer = document.querySelector(".profile-post-container");
 const posts = document.querySelectorAll(".post");
 const postInteraction = document.querySelector(".post-interaction");
 const removePost = document.querySelector(".remove-post");
 
-// let bgBodyMain = document.documentElement.style.setProperty(
-//   "--bg-body-main",
-//   "#151727"
-// );
-
 //  theme color change
 function toggleTheme(e) {
-  // for Icon changing.
-  const themeIcon = e.target;
+  const themeIcon = e.currentTarget.children[0];
+  const ulMainParent = e.currentTarget.parentElement;
+  ulMainParent.classList.remove("show");
   const bodyMain =
     document.documentElement.style.getPropertyValue("--bg-body-main");
 
@@ -62,8 +62,6 @@ function toggleTheme(e) {
       "rgb(55, 62, 87)"
     );
   }
-
-  toggle(e);
 }
 
 //  All menus state - active / inactive
@@ -131,7 +129,7 @@ function showLikePost(e) {
     interactionContainer.classList.toggle("liked");
   };
   liked();
-  setTimeout(liked, 500);
+  setTimeout(liked, 650);
   interactionEffect(likeBtn);
 }
 
@@ -232,6 +230,7 @@ function uploadFile(e) {
       uploadedFileParent.appendChild(label);
       uploadedFileParent.appendChild(fileWrapper);
       uploadedFileParent.classList.add("uploaded");
+      shareNewPostBtn.disabled = false;
     };
   }
 }
@@ -337,35 +336,121 @@ function shareNewPost() {
 //  for remove existing post
 function removeSharedPost(e) {
   const post = e.currentTarget.parentElement.parentElement;
+  const alertPopUp = document.createElement("div");
+  alertPopUp.classList.add("alert-popup");
+
   if (post == postContainer.firstElementChild) {
-    postContainer.firstElementChild.classList.add("alert");
+    alertPopUp.innerText =
+      "Please Don't remove First Post!! Created By Author..  ";
+    post.appendChild(alertPopUp);
+    alertPopUp.classList.add("show");
     setTimeout(() => {
-      postContainer.firstElementChild.classList.remove("alert");
+      alertPopUp.classList.remove("show");
     }, 1500);
     return;
   } else {
-    post.remove();
+    post.style.scale = "0";
+    post.addEventListener("transitionend", () => {
+      post.remove();
+    });
   }
 }
 
+//  for highlight linked element.
+const allLinks = Array.from(document.links);
+let allElements = [];
+
+allLinks.forEach((link) => {
+  if (
+    link.href.indexOf("#") == -1 ||
+    link.href.indexOf("#") + 1 == link.href.length
+  ) {
+    return;
+  } else {
+    link.addEventListener("click", showLinkedEl);
+  }
+});
+
+function showLinkedEl(e) {
+  const link = e.currentTarget.href;
+  const id = link.slice(link.indexOf("#") + 1);
+  const highlightedEl = document.getElementById(id);
+
+  highlightedEl.style.outline = "2px solid var(--bg-btn)";
+  setTimeout(() => {
+    highlightedEl.style.outlineWidth = "0px";
+  }, 400);
+  allElements.forEach((id) => {});
+}
+
+// for update Profile
+function updateProfile() {
+  changeProfile.classList.add("change");
+
+  function readFileAsync(files) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = function () {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(files);
+    });
+  }
+
+  async function updateUserProfile(e) {
+    const files = e.currentTarget.files[0];
+    try {
+      const userProfileUrl = await readFileAsync(files);
+      console.log(userProfileUrl, typeof userProfileUrl);
+      document.documentElement.style.setProperty(
+        "--profile-url",
+        `url(${userProfileUrl})`
+      );
+    } catch (error) {
+      console.log(error);
+    }
+
+    changeProfile.classList.remove("change");
+  }
+
+  changeProfile.children[0].children[0].addEventListener(
+    "change",
+    updateUserProfile
+  );
+}
+// need work her....
+function addMoreEvent() {}
+
 //  *************** all event listener  ******************
 
-postInteraction.addEventListener("click", interaction);
+// ***** shared post related *****
 posts.forEach((eachPost) => {
   eachPost.children[1].addEventListener("dblclick", showLikePost);
 });
-
+postInteraction.addEventListener("click", interaction);
+removePost.addEventListener("click", removeSharedPost);
+//  ******* more action *********
+showMoreOption.addEventListener("click", (e) => {
+  let itemsList = e.currentTarget.previousElementSibling;
+  itemsList.classList.toggle("show");
+});
 dayNightThemeBtn.addEventListener("click", toggleTheme);
-
+changeProfile.addEventListener("click", (e) => {
+  e.currentTarget.classList.add("change");
+});
+editProfile.addEventListener("click", updateProfile);
+// ****** sideBar toggle ******
 leftToggleMenuBtn.addEventListener("click", toggle);
 rightMsgControlerBtn.addEventListener("click", toggle);
-
+// menu state
 menuParent.forEach((ul) => {
   ul.addEventListener("click", activeMenu);
 });
-
+// new post shared
 postContentNewTextInput.addEventListener("input", enableBtn);
 showPhotoUpload.addEventListener("click", showUploadFileOption);
 attachFile.addEventListener("change", uploadFile);
 shareNewPostBtn.addEventListener("click", shareNewPost);
-removePost.addEventListener("click", removeSharedPost);
+
+addEvents.addEventListener("click", addMoreEvent);

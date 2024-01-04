@@ -40,40 +40,40 @@
             <h3 class="menu-title">Menu</h3>
             <ul class="menu-list">
               <li class="menu-list-item active">
-                <i class="fa-solid fa-house-user"></i>
-                <span class="menu-item-txt">
-                  <a href="#"> Home </a>
-                </span>
+                <a href="#home">
+                  <i class="fa-solid fa-house-user"></i>
+                  <span class="menu-item-txt"> Home </span>
+                </a>
               </li>
               <li class="menu-list-item">
-                <i class="fa-solid fa-book-open"></i>
-                <span class="menu-item-txt">
-                  <a href="#"> Latest News</a>
-                </span>
+                <a href="#">
+                  <i class="fa-solid fa-book-open"></i>
+                  <span class="menu-item-txt"> Latest News</span>
+                </a>
               </li>
               <li class="menu-list-item">
-                <i class="fa-solid fa-location-dot"></i>
-                <span class="menu-item-txt">
-                  <a href="#"> Explore </a>
-                </span>
+                <a href="#">
+                  <i class="fa-solid fa-location-dot"></i>
+                  <span class="menu-item-txt"> Explore </span>
+                </a>
               </li>
               <li class="menu-list-item">
-                <i class="fa-solid fa-file-lines"></i>
-                <span class="menu-item-txt">
-                  <a href="#"> Files </a>
-                </span>
+                <a href="#">
+                  <i class="fa-solid fa-file-lines"></i>
+                  <span class="menu-item-txt"> Files </span>
+                </a>
               </li>
               <li class="menu-list-item">
-                <i class="fa-solid fa-image"></i>
-                <span class="menu-item-txt">
-                  <a href="#"> Galery </a>
-                </span>
+                <a href="#">
+                  <i class="fa-solid fa-image"></i>
+                  <span class="menu-item-txt"> Galery </span>
+                </a>
               </li>
               <li class="menu-list-item">
-                <i class="fa-solid fa-calendar"></i>
-                <span class="menu-item-txt">
-                  <a href="#"> Events </a>
-                </span>
+                <a href="#all-events">
+                  <i class="fa-solid fa-calendar"></i>
+                  <span class="menu-item-txt"> Events </span>
+                </a>
               </li>
             </ul>
           </div>
@@ -82,28 +82,40 @@
             <h3 class="menu-title">Your Favourite</h3>
             <ul class="menu-list">
               <li class="menu-list-item">
-                <i>🏞️</i>
-                <span class="menu-item-txt"> Nature </span>
+                <a href="#">
+                  <i>🏞️</i>
+                  <span class="menu-item-txt"> Nature </span>
+                </a>
               </li>
               <li class="menu-list-item">
-                <i>🕊️</i>
-                <span class="menu-item-txt"> Bird </span>
+                <a href="#">
+                  <i>🕊️</i>
+                  <span class="menu-item-txt"> Bird </span>
+                </a>
               </li>
               <li class="menu-list-item">
-                <i>🎸</i>
-                <span class="menu-item-txt"> Music </span>
+                <a href="#">
+                  <i>🎸</i>
+                  <span class="menu-item-txt"> Music </span>
+                </a>
               </li>
               <li class="menu-list-item">
-                <i>🌴</i>
-                <span class="menu-item-txt"> Forest </span>
+                <a href="#">
+                  <i>🌴</i>
+                  <span class="menu-item-txt"> Forest </span>
+                </a>
               </li>
               <li class="menu-list-item">
-                <i>🏍️</i>
-                <span class="menu-item-txt"> Motobike </span>
+                <a href="#">
+                  <i>🏍️</i>
+                  <span class="menu-item-txt"> Motobike </span>
+                </a>
               </li>
               <li class="menu-list-item">
-                <i>🕺</i>
-                <span class="menu-item-txt"> Dance </span>
+                <a href="#">
+                  <i>🕺</i>
+                  <span class="menu-item-txt"> Dance </span>
+                </a>
               </li>
             </ul>
           </div>
@@ -122,7 +134,7 @@
       </aside>
 
       <!-- center profile page and post section -->
-      <section class="main-container">
+      <section class="main-container" id="home">
         <div class="profile-header">
           <div class="top-user-imgs">
             <div class="banner-img">
@@ -133,8 +145,21 @@
               />
             </div>
             <div class="user-profile-cantainer">
-              <span class="main-profile-pic user-profile"> </span>
-              <span class="user-name"> Mohit </span>
+              <span class="main-profile-pic user-profile">
+                <div class="change-profile">
+                  <input
+                    type="file"
+                    name="upload-new-profile"
+                    id="new-profile"
+                    accept="image/*"
+                  />
+                  <label
+                    for="new-profile"
+                    class="fa-solid fa-camera profile-pic-upload-icon"
+                  ></label>
+                </div>
+              </span>
+              <a href="#" class="user-name">Mohit</a>
             </div>
           </div>
 
@@ -161,8 +186,8 @@
           </div>
         </div>
 
-        <div class="left-area short-cards" id="user-about">
-          <div class="profile-info-card">
+        <div class="left-area short-cards">
+          <div class="profile-info-card" id="user-about">
             <div class="header">
               <span class="left-title">Introduction</span>
               <i class="fa-solid fa-ellipsis"></i>
@@ -182,8 +207,13 @@
             </p>
           </div>
 
-          <div class="profile-event profile-info-card">
-            <figure class="event-wrapper">
+          <div class="profile-event" id="all-events">
+            <div class="header">
+              <span class="left-title">Events</span>
+              <i class="fa-solid fa-plus" id="add-event"></i>
+            </div>
+
+            <figure class="event-wrapper profile-info-card">
               <img src="./images/calender-img.avif" alt="spectial-event-img" />
               <div class="event-date-wrapper">
                 <span class="month">Jan</span>
@@ -638,20 +668,25 @@
             />
           </div>
           <div class="more-option-footer">
-            <div class="expand">
-              <span class="settings">
+            <ul class="expand menu-list">
+              <!-- **** Future Update **** -->
+              <!-- <li class="menu-list-item">
                 <i class="fa-solid fa-gear"></i>
-              </span>
-              <span class="edit">
+                <span class="settings"> Settings </span>
+              </li> -->
+
+              <li class="menu-list-item" id="edit-profile">
                 <i class="fa-solid fa-pencil"></i>
-              </span>
-              <span class="dark-light-mode">
-                <i class="fa-regular fa-moon"></i>
-              </span>
-            </div>
-            <span class="more-account" id="day-night-mode">
-              <!-- <i class="fa-solid fa-plus"></i> -->
-              <i class="fa-solid fa-moon"></i>
+                <a href="#" class="edit"> Edit Profile </a>
+              </li>
+
+              <li class="menu-list-item" id="day-night-mode">
+                <i class="fa-solid fa-moon"></i>
+                <span class="more-account"> Dark Mode </span>
+              </li>
+            </ul>
+            <span class="more-option" id="show-more">
+              <i class="fa-solid fa-plus"></i>
             </span>
           </div>
         </div>

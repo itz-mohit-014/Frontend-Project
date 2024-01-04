@@ -22,7 +22,7 @@
   --color-menu-overlay: rgb(92, 94, 110, 0.4);
 
   /* profiles url */
-  --profile-url: url("./images/user-profile.png");
+  --profile-url: url("./images/user-pfoile.png");
 }
 
 /* general style */
@@ -30,6 +30,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: 0.25s ease;
+  -webkit-transition: 0.25s ease;
+  -moz-transition: 0.25s ease;
+  -o-transition: 0.25s ease;
 }
 
 body {
@@ -87,7 +91,7 @@ ul li {
 /* both sidebar  */
 .side-menu {
   flex: 1 1 20%;
-  width: 18.5%;
+  width: 20%;
   min-width: 260px;
   background-color: var(--bg-body-main);
   height: 100vh;
@@ -143,7 +147,7 @@ ul li {
 .logo-txt {
   writing-mode: vertical-lr;
   text-align: center;
-  font: 600 clamp(1rem, 3vw, 1.2rem) / 3.6rem var(--font-roboto-slab);
+  font: 600 clamp(1.5rem, 10vw, 1.5rem) / 3.6rem var(--font-roboto-slab);
   letter-spacing: 4px;
   color: var(--color-base1);
 }
@@ -238,14 +242,10 @@ ul li {
   margin-bottom: 1rem;
 }
 
-.diff-nav-links .menu-list-item {
-  padding: 0.6rem 1rem;
-}
 .menu-list-item {
   color: var(--color-gray1);
   font: 400 clamp(0.75rem, 5vw, 0.9rem) var(--font-poppins);
   border-radius: 0.4rem;
-  padding: 0.6rem 0px;
   margin: 4px 0px;
   cursor: pointer;
   transition: 0.15s ease;
@@ -256,6 +256,11 @@ ul li {
 }
 
 .menu-list-item a {
+  font-style: normal;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0.6rem 1rem;
   color: var(--color-gray1);
 }
 
@@ -430,7 +435,7 @@ ul li {
 
 .top-user-imgs .user-profile-cantainer {
   position: absolute;
-  bottom: -50px;
+  bottom: -35px;
   left: 1.5rem;
   height: fit-content;
   width: fit-content;
@@ -446,18 +451,42 @@ ul li {
   border-radius: 50%;
   border: 2px solid var(--color-base1);
   overflow: hidden;
+  position: relative;
 }
 
-.user-profile-cantainer .main-profile-pic img {
+.change-profile {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  scale: 0;
+}
+
+.main-profile-pic.change .change-profile {
+  scale: 1;
+}
+
+.change-profile input {
+  display: none;
+}
+
+.change-profile label {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: 0% 0%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem !important;
+  color: var(--color-base1);
+  cursor: pointer;
+  background-color: var(--bg-body-secondary);
 }
 
 .user-profile-cantainer .user-name {
-  font: 500 clamp(1rem, 4vw, 2rem) var(--font-roboto-slab);
+  font: 500 clamp(1rem, 6vw, 2rem) var(--font-roboto-slab);
   color: var(--color-base1);
+  padding-top: 0.5rem;
 }
 
 .bottom-timeline-list {
@@ -528,13 +557,12 @@ ul li {
   align-items: center;
   justify-content: space-between;
   font: 600 clamp(0.8rem, 5vw, 1.2rem) var(--font-poppins);
-  color: var(--color-gray2);
+  color: var(--color-base1);
   margin-bottom: 0.6rem;
 }
 
 .profile-info-card .header i {
   font-size: 2rem;
-  color: var(--color-gray1);
 }
 
 .profile-info-card .intro-details {
@@ -549,6 +577,24 @@ ul li {
 .profile-info-card .intro-details .link {
   color: var(--color-link);
   cursor: pointer;
+}
+
+.profile-event {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.profile-event .header {
+  background-color: var(--bg-body-main);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  font: 600 clamp(0.8rem, 5vw, 1.2rem) var(--font-poppins);
+  color: var(--color-base1);
+  margin-bottom: 0.6rem;
 }
 
 /* event card */
@@ -676,7 +722,6 @@ ul li {
 }
 
 .external-file-upload.uploaded label {
-  /* display: none; */
   position: relative;
   font-size: 1.2rem !important;
   display: block;
@@ -817,12 +862,15 @@ ul li {
 }
 
 .profile-post-container .post {
+  transition: 0.25s ease;
+  -moz-transition: 0.25s ease;
+  -webkit-transition: 0.25s ease;
+  -o-transition: 0.25s ease;
   position: relative;
   width: 100%;
 }
 
-.post::after {
-  content: "Please Dont Remove First Post!!";
+.alert-popup {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -849,7 +897,7 @@ ul li {
   -o-transition: 0.25s ease;
 }
 
-.post.alert::after {
+.alert-popup.show {
   scale: 1;
 }
 
@@ -940,6 +988,10 @@ ul li {
   font: 400 0.9rem var(--font-poppins);
   color: var(--color-base1);
   width: 100%;
+}
+
+.about-post-desc .post-image {
+  margin-top: 1rem;
 }
 
 .external-file {
@@ -1073,8 +1125,8 @@ ul li {
 }
 
 /* .side-right .header, */
-.side-right .header i,
-.side-right .footer i {
+.header i,
+.footer i {
   color: var(--color-gray2);
   font-size: 1.25rem !important;
   padding: 0.5rem 0.6rem;
@@ -1092,8 +1144,8 @@ ul li {
   padding: 0.5rem 0.7rem !important;
 }
 
-.side-right .header i:hover,
-.side-right .footer i:hover {
+.header i:hover,
+.footer i:hover {
   color: var(--color-base1);
   translate: 0px -3px;
   scale: 1.05;
@@ -1175,23 +1227,48 @@ ul li {
 .side-right .footer .left input:focus {
   border: 2px solid var(--color-base1);
 }
-
 .side-right .footer .expand {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  gap: 0.8rem;
+  gap: 0.4rem;
   position: absolute;
-  top: -110px;
+  bottom: 100%;
   right: 0px;
-  background-color: var(--color-base3);
-  height: 120px;
-  width: 50px;
-  border-radius: 8px;
+  background-color: var(--bg-body-secondary);
+  height: auto;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 0.8rem;
+  color: var(--color-gray1);
+  translate: 100%;
+}
 
-  /* future update */
-  display: none;
+.side-right .footer .expand .edit {
+  display: inline;
+  padding: 0px;
+}
+
+.side-right .footer .expand.show {
+  translate: 0%;
+}
+.expand li.menu-list-item {
+  padding: 0.5rem 1rem;
+}
+
+.expand li.menu-list-item:hover,
+.expand li.menu-list-item.active {
+  background-color: var(--bg-body-main);
+}
+
+.expand li.menu-list-item.active i {
+  color: var(--color-base1);
+  background-color: var(--bg-body-secondary);
+}
+.expand li.menu-list-item:hover i {
+  color: var(--color-base1);
+  background-color: var(--bg-body-secondary);
 }
 
 /* story's part style */
@@ -1215,6 +1292,7 @@ ul li {
   justify-content: flex-start;
   align-items: center;
   gap: 0.8rem;
+  padding: 0.5rem;
 }
 
 .story-list .list-items:hover,
@@ -1303,7 +1381,7 @@ ul li {
 /* responsive design */
 
 /* max-width breakpoint */
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 480px) {
   .search-bar {
     display: none;
   }
@@ -1324,6 +1402,7 @@ ul li {
     flex: 1;
     writing-mode: horizontal-tb;
     line-height: 50px;
+    font-size: clamp(1.5rem, 10vw, 2rem);
   }
 
   .side-left.show .logo {
@@ -1334,8 +1413,14 @@ ul li {
     max-width: 100%;
   }
 
+  .side-menu {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
   .main-container {
     margin-left: 0px;
+    padding: 3vw;
   }
   .short-cards .profile-info-card {
     padding: 0.9rem;
@@ -1344,25 +1429,12 @@ ul li {
   .bottom-container {
     padding: 1rem 0.9rem !important;
   }
-}
-
-@media screen and (max-width: 480px) {
-  .side-menu {
-    width: 100% !important;
-  }
-
-  .side-menu.show:after {
-    display: none;
-  }
-  .main-container {
-    padding: 0.5rem;
-  }
 
   .profile-header .top-user-imgs {
     height: clamp(100px, 75%, 240px);
   }
 
-  .timeline-menus li.menu-items:nth-child(n + 4) {
+  .timeline-menus li.menu-items:nth-child(2n + 3) {
     display: none;
   }
   .bottom-container .post-more-details {
@@ -1381,7 +1453,6 @@ ul li {
   .timeline-menus .timeline-menu-items {
     line-height: 3rem;
     letter-spacing: 0px;
-    font-size: clamp(0.75rem, 3vw, 0.85rem);
   }
 
   .timeline-menus .timeline-menu-items {
@@ -1408,9 +1479,6 @@ ul li {
   .show-uploaded-file img {
     max-height: 450px;
   }
-  .user-profile-cantainer .user-name {
-    margin-bottom: 2rem;
-  }
 
   .right-area {
     grid-column: span 2;
@@ -1432,7 +1500,6 @@ ul li {
     display: flex;
     translate: 0%;
     padding-top: 60px;
-    max-width: 340px;
   }
 
   .logo {
@@ -1455,14 +1522,14 @@ ul li {
     margin-left: 0px;
   }
 
-  .side-menu.show::after {
+  .side-left.show::after {
     display: none;
   }
 }
 
 @media screen and (min-width: 1200px) {
   .search-bar {
-    width: 63%;
+    width: 60%;
     right: auto;
   }
 
@@ -1474,6 +1541,11 @@ ul li {
     position: relative;
     translate: 0%;
   }
+
+  .side-menu.show::after {
+    display: none;
+  }
+
   .side-right {
     display: block;
   }
