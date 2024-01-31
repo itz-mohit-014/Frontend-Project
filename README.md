@@ -1,2 +1,4 @@
-# Project for Codmentor  
-Inside this repository, projects for practice as a frontend Developer. These project ideas I got from https://www.codementor.io/projects/ so I desided to solve to strong my logic. And these project is also helps to improve in learning.
+# Project for Showkesh
+Create Some Projects to improve skills.
+### Live URL:
+1. [Social Medial Like UI](https://divwithmohit.netlify.app/social-platform-ui-web-app/)
