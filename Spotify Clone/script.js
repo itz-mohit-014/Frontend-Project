@@ -78,6 +78,7 @@ const currentSongArtistNameEl = musicPlayerEl.querySelector("#cur-song-artist");
 const playPauseBtn = musicPlayerEl.querySelector("#play-paused-btn");
 const volumeBtn = musicPlayerEl.lastElementChild;
 const seekBarInMusisPlayer = musicPlayerEl.querySelector(".song-seekbar");
+const viewMode = document.querySelector(".view-mode");
 
 const toggleSidebar = document
   .getElementById("toggle-sibebar")
@@ -186,6 +187,9 @@ function musicPlayerControls() {
 
         case "next":
           loadNextSong(clickedControlEl);
+          break;
+        case "repeat-mode":
+          repeatMode(clickedControlEl);
           break;
       }
     });
@@ -361,12 +365,13 @@ function updateSeekbarViaSongDuration() {
   seekBarInMusisPlayer.value = songCurDuration;
 }
 
-function showVolueBtn(e) {
+function toggleVolumeBtn(e) {
   let volumeBarContainer = e.currentTarget.querySelector(".volume-bar");
   volumeBarContainer.classList.toggle("show");
 }
 
-function increseDecresVolume(e) {
+let timeoutId = null;
+function increseDecreseVolume(e) {
   let showVoumeEl = e.currentTarget.nextElementSibling;
   showVoumeEl.innerHTML = e.currentTarget.value;
   playingSong.currentSong.volume = e.currentTarget.value / 100;
@@ -379,8 +384,38 @@ seekBarInMusisPlayer.addEventListener("input", (e) => {
     (Math.floor(position) / 100) * playingSong.currentSong.duration);
 });
 
-volumeBtn.addEventListener("click", showVolueBtn);
-volumeBtn.querySelector("input").addEventListener("input", increseDecresVolume);
+volumeBtn.addEventListener("click", toggleVolumeBtn);
+
+const isMobile = window.innerWidth < 991 ? true : false;
+
+volumeBtn.querySelector("input").addEventListener("change", (e) => {
+  e.currentTarget.parentElement.classList.remove("show");
+});
+
+volumeBtn
+  .querySelector("input")
+  .addEventListener("input", increseDecreseVolume);
+
+viewMode.addEventListener("click", (e) => {
+  if (e.currentTarget === e.target) return;
+  let changeViewModeEl = null;
+  if (e.target.nodeName !== "DIV") {
+    changeViewModeEl = e.target.closest("div");
+  } else {
+    changeViewModeEl = e.target;
+  }
+  if (changeViewModeEl.classList.contains("row-view")) {
+    Array.from(songsCardWrapper.children).forEach((songCard) => {
+      songCard.classList.add("row-view");
+    });
+  } else {
+    Array.from(songsCardWrapper.children).forEach((songCard) => {
+      if (songCard.classList.contains("row-view")) {
+        songCard.classList.remove("row-view");
+      }
+    });
+  }
+});
 
 songsCardWrapper.innerHTML = "";
 songData.forEach((song) => {
