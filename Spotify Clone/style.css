@@ -676,7 +676,8 @@ footer .likns-wrapper {
 
 .left-song-details {
   gap: 0.75rem;
-  min-width: 30%;
+  min-width: 200px;
+  max-width: fit-content;
 }
 .left-song-details .song-pic {
   height: 60px;
