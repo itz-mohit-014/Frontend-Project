@@ -864,6 +864,7 @@ footer .likns-wrapper {
     order: 3;
   }
 }
+
 @media screen and (max-width: 767px) {
   .login-sign-up .btn {
     font-size: 0.9rem;
@@ -881,10 +882,25 @@ footer .likns-wrapper {
   }
   .bottom-player.music-player {
     flex-wrap: wrap;
+    min-height: 220px;
+    gap: 0.5rem;
+    align-content: flex-start;
   }
 
   .left-song-details {
     width: 100%;
+  }
+
+  .volume-bar {
+    background-color: var(--bg-black);
+    top: -60px;
+    left: auto;
+    right: 0px;
+    transform: rotate(0deg);
+    padding: 0.5rem;
+  }
+  .volume-bar .show-volumne {
+    transform: rotate(0deg);
   }
 }
 

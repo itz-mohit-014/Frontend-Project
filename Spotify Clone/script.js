@@ -361,12 +361,9 @@ function updateSeekbarViaSongDuration() {
   seekBarInMusisPlayer.value = songCurDuration;
 }
 
-function changeVolume(e) {
+function showVolueBtn(e) {
   let volumeBarContainer = e.currentTarget.querySelector(".volume-bar");
   volumeBarContainer.classList.toggle("show");
-  let inputEl = e.currentTarget.querySelector("input");
-  inputEl.nextElementSibling.innerHTML = inputEl.value;
-  inputEl.addEventListener("input", increseDecresVolume);
 }
 
 function increseDecresVolume(e) {
@@ -382,7 +379,8 @@ seekBarInMusisPlayer.addEventListener("input", (e) => {
     (Math.floor(position) / 100) * playingSong.currentSong.duration);
 });
 
-volumeBtn.addEventListener("click", changeVolume);
+volumeBtn.addEventListener("click", showVolueBtn);
+volumeBtn.querySelector("input").addEventListener("input", increseDecresVolume);
 
 songsCardWrapper.innerHTML = "";
 songData.forEach((song) => {
