@@ -295,10 +295,14 @@ function playSong(song) {
   if (!playingSong.previousSong) {
     playingSong.previousSong = playingSong.currentSong;
     playingSong.currentSong.play();
+    // active song
+    playingSong.currentSong.parentElement.classList.add("active");
   } else {
     playingSong.previousSong.pause();
+    playingSong.previousSong.parentElement.classList.remove("active");
     playingSong.previousSong = playingSong.currentSong;
     playingSong.currentSong.play();
+    playingSong.currentSong.parentElement.classList.add("active");
   }
 
   updateSongTimingInPlayer();

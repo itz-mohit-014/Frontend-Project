@@ -548,7 +548,8 @@ header .view-mode svg {
 }
 
 .songs-card:hover .play-icon,
-.songs-card:active .play-icon {
+.songs-card:active .play-icon,
+.songs-card.active .play-icon {
   opacity: 1;
   transform: translate(0px);
 }
@@ -590,7 +591,8 @@ header .view-mode svg {
 }
 
 .songs-card.row-view:hover .play-icon,
-.songs-card.row-view:active .play-icon {
+.songs-card.row-view:active .play-icon,
+.songs-card.row-view.active .play-icon {
   transform: translate(-50%, 50%);
 }
 
