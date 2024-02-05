@@ -62,6 +62,20 @@ const songData = [
     titleImage:
       "https://i.scdn.co/image/ab67616d00001e023fb3fb3086a40c2c5062501d",
   },
+  {
+    name: "Tera Chehra",
+    artist: "Arijit Singh",
+    music: "./assets/songs/Tera-Chehra.mp3",
+    titleImage:
+      "https://i.scdn.co/image/ab67616d00001e02b889b365c25bfa01f9772a1e",
+  },
+  {
+    name: "O Sajna",
+    artist: "Akhil Sachdeva",
+    music: "./assets/songs/O-Saajna.mp3",
+    titleImage:
+      "https://i.scdn.co/image/ab67616d00001e02ecf2a706ac0b939a3c708c70",
+  },
 ];
 
 // for song control
