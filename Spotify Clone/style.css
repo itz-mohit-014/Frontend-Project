@@ -706,7 +706,10 @@ footer .likns-wrapper {
   background: var(--bg-black);
   flex-wrap: nowrap;
   gap: 0.4rem;
-  min-height: 130px;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: fit-content;
   align-items: flex-start;
   padding: 0.5rem 0.75rem;
   transform: translate(0%, 110%);
@@ -898,11 +901,10 @@ footer .likns-wrapper {
 }
 
 .bottom-player.music-player.expand {
-  position: absolute;
   top: 0px;
-  left: 0px;
+  bottom: auto;
   z-index: 3;
-  padding: 1rem;
+  padding: 5vw;
   height: 100dvh;
   flex-direction: column;
 }
@@ -927,7 +929,7 @@ footer .likns-wrapper {
 }
 .expand > .left-playing-song-details .song-pic {
   padding: 1.5rem 2rem 0px;
-  flex: 1 1 90%;
+  flex: 1 1 100%;
   height: fit-content;
   margin-bottom: 4px;
 }
@@ -1026,7 +1028,7 @@ footer .likns-wrapper {
   }
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 992px) {
   .left {
     position: absolute;
     left: 0px;
@@ -1063,23 +1065,16 @@ footer .likns-wrapper {
   .music-player-controls {
     flex: 0;
   }
-  .right-volumn-control-btn {
-    display: none;
-  }
-  .top-controls > *:not(#play-paused-btn) {
-    display: none;
-  }
+  .right-volumn-control-btn,
+  .top-controls > *:not(#play-paused-btn),
   .bottom-duration {
-    display: none;
+    display: none !important;
   }
-  .expand .right-volumn-control-btn {
-    display: flex;
-  }
-  .expand .top-controls > *:not(#play-paused-btn) {
-    display: flex;
-  }
+
+  .expand .right-volumn-control-btn,
+  .expand .top-controls > *:not(#play-paused-btn),
   .expand .bottom-duration {
-    display: flex;
+    display: flex !important;
   }
 }
 
