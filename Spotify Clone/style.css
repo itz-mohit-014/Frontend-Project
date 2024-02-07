@@ -583,8 +583,6 @@ header .view-mode svg {
 }
 
 .song-details h3 {
-  text-overflow: ellipsis;
-  text-wrap: nowrap;
   font: 500 1rem / 2rem var(--font-circular-medium);
 }
 .song-details p {
@@ -927,7 +925,7 @@ footer .likns-wrapper {
 
 .expand > .left-playing-song-details {
   flex-wrap: wrap;
-  height:70%;
+  height: 70%;
   gap: 0.5rem;
 }
 .expand > .left-playing-song-details .song-pic {
@@ -1063,7 +1061,7 @@ footer .likns-wrapper {
   .modal {
     right: 0px !important;
   }
-  .music-player.show{
+  .music-player.show {
     min-height: 120px;
     align-items: flex-start;
   }
