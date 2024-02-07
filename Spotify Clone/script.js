@@ -357,42 +357,49 @@ function expandMusicPlayer(e) {
 }
 
 let allSongsData = [];
+
 async function getSongs() {
-  // fetch using base uri for hosting
-  let baseURL = document.baseURI;
-  const res = await fetch(`${baseURL}assets/songs/`);
-  const result = await res.text();
+  const baseUrl = "./assets/songs/";
+  try {
+    const res = await fetch(`${baseUrl}`);
+    const result = await res.text();
 
-  const div = document.createElement("div");
-  div.innerHTML = result;
-  let anchors = div.getElementsByTagName("a");
-
-  for (a of anchors) {
-    let songFolder = a.href.split("/songs/")[1];
-    if (songFolder) {
-      extrectSongData(songFolder);
-      async function extrectSongData(folder) {
-        const res = await fetch(`./assets/songs/${folder}`);
-        const result = await res.text();
-
-        const div = document.createElement("div");
-        div.innerHTML = result;
-        let allAnchors = div.getElementsByTagName("a");
-
-        for (a of allAnchors) {
-          let songMetadataFolder = a.href.split(`/songs/${folder}/`)[1];
-          if (songMetadataFolder === "info.json") {
-            readInfoFileData(a.href);
-            break;
-          }
-        }
+    const div = document.createElement("div");
+    div.innerHTML = result;
+    const songFolders = [];
+    for (const a of div.getElementsByTagName("a")) {
+      const songFolder = a.href.split("/songs/")[1];
+      if (songFolder) {
+        songFolders.push(songFolder);
       }
     }
-  }
-  async function readInfoFileData(infoFile) {
-    const res = await fetch(infoFile);
-    const data = await res.json();
-    addSongs(data);
+
+    // Fetch and process metadata for each song folder:
+    for (const songFolder of songFolders) {
+      try {
+        const folderUrl = `${baseUrl}${songFolder}`;
+        const folderRes = await fetch(folderUrl);
+        const folderResult = await folderRes.text();
+
+        const folderDiv = document.createElement("div");
+        folderDiv.innerHTML = folderResult;
+
+        const infoLink = folderDiv.querySelector("a[href$='info.json']");
+        if (infoLink) {
+          try {
+            const infoData = await fetch(infoLink.href);
+            const jsonData = await infoData.json();
+            addSongs(jsonData);
+          } catch (error) {
+            console.error(`Error fetching metadata for ${songFolder}`, error);
+          }
+        }
+      } catch (error) {
+        console.error(`Error fetching song folder: ${songFolder}`, error);
+      }
+    }
+  } catch (error) {
+    console.error("Error fetching song list:", error);
   }
 }
 getSongs();
