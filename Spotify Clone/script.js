@@ -360,7 +360,7 @@ let allSongsData = [];
 async function getSongs() {
   // fetch using base uri for hosting
   let baseURL = document.baseURI;
-  const res = await fetch(`./assets/songs/`);
+  const res = await fetch(`assets/songs/`);
   const result = await res.text();
 
   const div = document.createElement("div");
