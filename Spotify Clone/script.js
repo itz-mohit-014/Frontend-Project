@@ -359,7 +359,7 @@ function expandMusicPlayer(e) {
 let allSongsData = [];
 
 async function getSongs() {
-  const baseUrl = "../assets/songs/";
+  const baseUrl = "./assets/songs/";
   try {
     const res = await fetch(`${baseUrl}`);
     const result = await res.text();
