@@ -81,6 +81,10 @@ html {
   -o-transition: all 0.25s linear;
 }
 
+.invert {
+  filter: invert(1);
+}
+
 /* general styling */
 
 * {
@@ -136,7 +140,7 @@ svg {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 1fr), 180px;
+  grid-template-rows: repeat(3, 1fr) auto;
   gap: 0.5rem;
   padding: 0.5rem;
   position: relative;
@@ -150,7 +154,7 @@ svg {
 .right {
   grid-column: span 3;
 }
-.bottom-player {
+.music-player {
   grid-column: span 4;
 }
 /****** layout end ******/
@@ -253,10 +257,6 @@ ul li.list-items:nth-child(1) {
   color: var(--text-active);
 }
 
-.logo svg {
-  fill: var(--text-active);
-}
-
 .bottom {
   flex: 1;
   height: calc(100% - 200px);
@@ -355,9 +355,8 @@ ul li.list-items:nth-child(1) {
   cursor: pointer;
   margin-bottom: 1.5rem;
 }
-.select-lang svg {
+.select-lang img {
   height: 18px;
-  fill: var(--text-active);
 }
 .select-lang-name {
   font: 500 0.85rem var(--font-circular-medium);
@@ -522,12 +521,38 @@ header .view-mode svg {
   overflow: hidden;
   position: relative;
 }
-
-.song-img-wrapper img {
+.song-img-wrapper.loading {
   border-radius: 0.4rem;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.693);
+  background-size: 200%;
+  background-image: linear-gradient(
+    90deg,
+    #e8e8e8,
+    #ffffff,
+    20%,
+    #e8e8e8,
+    #e8e8e8
+  );
+  animation: loadImgBg 0.5s linear infinite;
+}
+@keyframes loadImgBg {
+  0% {
+    background-position: 150%;
+  }
+  100% {
+    background-position: -50%;
+  }
+}
+
+.song-img-wrapper.loading img.hide {
+  /* box-shadow: none; */
+  visibility: hidden;
+}
+.song-img-wrapper img {
   width: 100%;
   height: 100%;
+  min-height: 100px;
+  border-radius: 0.4rem;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.693);
   object-fit: cover;
   object-position: center;
 }
@@ -655,8 +680,8 @@ footer .likns-wrapper {
   width: 2.75rem;
 }
 
-.social-links .links li svg {
-  fill: var(--text-active);
+.social-links .links li img {
+  filter: invert(1) !important;
   height: 18px;
   width: 18px;
 }
@@ -674,49 +699,20 @@ footer .likns-wrapper {
 }
 
 /* music player  */
-.bottom-player {
-  flex: 1 0 100%;
+.music-player {
   width: 100%;
-  height: fit-content;
-  padding: 0.5rem 0.75rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  background-image: linear-gradient(to right, #af2997, #529bf5);
-}
-
-.details h3,
-.details p {
-  font: 500 1rem var(--font-circular-medium);
-}
-.details p {
-  font-size: 0.85rem;
-  line-height: 1.2rem;
-}
-
-.bottom-player button {
-  margin-right: 1rem;
-  padding: 0.9rem 1.75rem;
-  font: 500 1rem var(--font-circular-medium);
-}
-/* after login player */
-.bottom-player.music-player {
   background: var(--bg-black);
-  flex-wrap: nowrap;
   gap: 0.4rem;
-  position: absolute;
+  /* position: absolute;
   bottom: 0px;
-  left: 0px;
-  height: fit-content;
-  align-items: flex-start;
-  padding: 0.5rem 0.75rem;
+  left: 0px; */
+  /* height: fit-content; */
+  align-items: center;
+  padding: 0.5rem 1rem;
   transform: translate(0%, 110%);
-  display: none;
 }
 
-.bottom-player.music-player.show {
+.music-player.show {
   transform: translate(0%);
 }
 
@@ -744,6 +740,9 @@ footer .likns-wrapper {
 
 .favorite-icon {
   padding: 0.5rem;
+}
+.favorite-icon img {
+  height: 1.6rem;
 }
 
 .current-song-details {
@@ -785,6 +784,10 @@ footer .likns-wrapper {
   align-items: center;
   justify-content: center;
   position: relative;
+}
+
+#play-paused-btn img {
+  height: 1.25rem;
 }
 
 .loading-song-circle {
@@ -900,7 +903,7 @@ footer .likns-wrapper {
   margin-left: 6px;
 }
 
-.bottom-player.music-player.expand {
+.music-player.expand {
   top: 0px;
   bottom: auto;
   z-index: 3;
@@ -919,8 +922,8 @@ footer .likns-wrapper {
 .mobile-expand-header .icon {
   padding: 0.25rem;
 }
-.mobile-expand-header .icon svg {
-  fill: #ffffff;
+.mobile-expand-header .icon img {
+  height: 1.25rem;
 }
 
 .expand > .left-playing-song-details {
@@ -930,8 +933,12 @@ footer .likns-wrapper {
 .expand > .left-playing-song-details .song-pic {
   padding: 1.5rem 2rem 0px;
   flex: 1 1 100%;
-  height: fit-content;
+  /* height: 70%; */
   margin-bottom: 4px;
+}
+.expand > .left-playing-song-details .song-pic img {
+  height: 100%;
+  object-fit: contain;
 }
 .expand .current-song-details .song-name {
   font-size: 1.3rem;
@@ -1056,7 +1063,9 @@ footer .likns-wrapper {
   .modal {
     right: 0px !important;
   }
-
+  /* .music-player {
+    align-items: center;
+  } */
   .left-playing-song-details {
     width: 100%;
     max-width: 100%;

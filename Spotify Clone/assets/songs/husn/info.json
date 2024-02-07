@@ -2,5 +2,6 @@
     "name": "Husn",
     "artist": "Ali Zafar",
     "image":
-      "https://i.scdn.co/image/ab67616d00001e020d3449f333a83a25feb423f8"
+      "https://i.scdn.co/image/ab67616d00001e020d3449f333a83a25feb423f8",
+    "song":"./assets/songs/husn/husn.mp3"
   }
