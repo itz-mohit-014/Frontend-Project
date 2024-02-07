@@ -361,7 +361,7 @@ let allSongsData = [];
 async function getSongs() {
   // netlify hosting change path.
   // const baseUrl = "https://divwithmohit.netlify.app/spotify%20clone/assets/songs/";
-  const baseUrl = "./assets/songs/";
+  const baseUrl = "./songs/";
   
   try {
     const res = await fetch(`${baseUrl}`);
@@ -375,7 +375,6 @@ async function getSongs() {
       if(songFolder == '.htaccess'){
         break;
       }
-      console.log(songFolder)
       if (songFolder) {
         songFolders.push(songFolder);
       }
