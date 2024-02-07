@@ -359,7 +359,10 @@ function expandMusicPlayer(e) {
 let allSongsData = [];
 
 async function getSongs() {
-  const baseUrl = "./assets/songs/";
+  // netlify hosting change path.
+  const baseUrl = "https://divwithmohit.netlify.app/spotify%20clone/assets/songs/";
+  // const baseUrl = "./assets/songs/";
+  
   try {
     const res = await fetch(`${baseUrl}`);
     const result = await res.text();
@@ -368,7 +371,11 @@ async function getSongs() {
     div.innerHTML = result;
     const songFolders = [];
     for (const a of div.getElementsByTagName("a")) {
-      const songFolder = a.href.split("/songs/")[1];
+      const songFolder = a.href.split("/songs/")[1] ;
+      if(songFolder == '.htaccess'){
+        break;
+      }
+      console.log(songFolder)
       if (songFolder) {
         songFolders.push(songFolder);
       }
