@@ -360,7 +360,6 @@ let allSongsData = [];
 
 async function getSongs() {
   const baseUrl = "./songs/";
-  
   try {
     const res = await fetch(`${baseUrl}`);
     const result = await res.text();
@@ -369,8 +368,8 @@ async function getSongs() {
     div.innerHTML = result;
     const songFolders = [];
     for (const a of div.getElementsByTagName("a")) {
-      const songFolder = a.href.split("/songs/")[1] ;
-      if(songFolder == '.htaccess'){
+      const songFolder = a.href.split("/songs/")[1];
+      if (songFolder == ".htaccess") {
         break;
       }
       if (songFolder) {
