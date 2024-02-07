@@ -358,7 +358,9 @@ function expandMusicPlayer(e) {
 
 let allSongsData = [];
 async function getSongs() {
-  const res = await fetch("./assets/songs/");
+  // fetch using base uri for hosting
+  let baseURL = document.baseURI;
+  const res = await fetch(`${baseURL}/assets/songs/`);
   const result = await res.text();
 
   const div = document.createElement("div");
