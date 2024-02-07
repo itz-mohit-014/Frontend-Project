@@ -360,8 +360,8 @@ let allSongsData = [];
 
 async function getSongs() {
   // netlify hosting change path.
-  const baseUrl = "https://divwithmohit.netlify.app/spotify%20clone/assets/songs/";
-  // const baseUrl = "./assets/songs/";
+  // const baseUrl = "https://divwithmohit.netlify.app/spotify%20clone/assets/songs/";
+  const baseUrl = "./assets/songs/";
   
   try {
     const res = await fetch(`${baseUrl}`);
